@@ -7,18 +7,24 @@ import { AnnouncementComponent } from './components/announcement/announcement.co
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { CategoriesComponent } from './components/categories/categories.component';
+import {MatSelectModule} from '@angular/material/select';
+import { NameFormatPipe } from './pipes/name-format.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AnnouncementComponent
+    AnnouncementComponent,
+    CategoriesComponent,
+    NameFormatPipe
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

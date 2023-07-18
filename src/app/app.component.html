@@ -1,5 +1,14 @@
-<mat-grid-list cols="3" rowHeight="2:1">
-  <mat-grid-tile *ngFor="let announcement of announcements;">
-    <app-announcement [announcement]="announcement" class="announcement-card"></app-announcement>
-  </mat-grid-tile>
-</mat-grid-list>
+<div class="container">
+  <app-categories
+    class="category-selector"
+    (changeCategory)="filterCategories($event)"
+  ></app-categories>
+  <mat-grid-list cols="3" rowHeight="2:1">
+    <mat-grid-tile *ngFor="let announcement of filteredAnnouncements">
+      <app-announcement
+        [announcement]="announcement"
+        class="announcement-card"
+      ></app-announcement>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

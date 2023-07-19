@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Category } from "src/app/models/category";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-announcement-form',
@@ -19,6 +20,8 @@ export class AddAnnouncementFormComponent {
     name: 'Laboratory'
   }]
 
+  constructor(private router: Router){}
+
   announcementForm = new FormGroup({
     title: new FormControl('', Validators.required),
     author: new FormControl('', Validators.required),
@@ -28,5 +31,6 @@ export class AddAnnouncementFormComponent {
 
   onSubmit(): void {
     console.log(this.announcementForm.value);
+    this.router.navigate(['/home']);
   }
 }

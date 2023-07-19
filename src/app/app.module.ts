@@ -10,13 +10,20 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { CategoriesComponent } from './components/categories/categories.component';
 import {MatSelectModule} from '@angular/material/select';
 import { NameFormatPipe } from './pipes/name-format.pipe';
+import { AddAnnouncementFormComponent } from './components/add-announcement-form/add-announcement-form.component';
+import {FormsModule} from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+import { HomeComponentComponent } from './components/home-component/home-component.component';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [
     AppComponent,
     AnnouncementComponent,
     CategoriesComponent,
-    NameFormatPipe
+    NameFormatPipe,
+    AddAnnouncementFormComponent,
+    HomeComponentComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +31,10 @@ import { NameFormatPipe } from './pipes/name-format.pipe';
     MatButtonModule,
     MatCardModule,
     MatGridListModule,
-    MatSelectModule
+    MatSelectModule,
+    FormsModule,
+    AppRoutingModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

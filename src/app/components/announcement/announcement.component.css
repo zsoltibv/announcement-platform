@@ -24,4 +24,8 @@
 
 .edit-button {
   background-color: #a5f3fc;
+}
+
+.mat-mdc-card-title:hover {
+  cursor: pointer;
 }/*# sourceMappingURL=announcement.component.css.map */

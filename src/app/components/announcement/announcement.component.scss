@@ -27,3 +27,9 @@ $bg-color: #f4f4f5;
 .edit-button{
   background-color: #a5f3fc;
 }
+
+.mat-mdc-card-title{
+  &:hover {
+    cursor: pointer;
+  }
+}

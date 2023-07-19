@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>{{announcement.title}}</mat-card-title>
+    <mat-card-title [routerLink]="['/announcement', announcement.title]">{{announcement.title}}</mat-card-title>
     <mat-card-subtitle>{{announcement.author | nameFormat}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>

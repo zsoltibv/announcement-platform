@@ -1,21 +1,24 @@
-<form action="">
+<form [formGroup]="announcementForm" (ngSubmit)="onSubmit()">
+  <h1>Add Announcement</h1>
   <mat-form-field>
     <mat-label>Title</mat-label>
-    <input matInput />
+    <input matInput formControlName="title" />
   </mat-form-field>
   <mat-form-field>
     <mat-label>Author</mat-label>
-    <input matInput />
+    <input matInput formControlName="author" />
   </mat-form-field>
   <mat-form-field>
     <mat-label>Message</mat-label>
-    <textarea matInput></textarea>
+    <textarea matInput formControlName="message"></textarea>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Category</mat-label>
-    <mat-select>
-      <mat-option value="one">First option</mat-option>
-      <mat-option value="two">Second option</mat-option>
+    <mat-select formControlName="category">
+      <mat-option *ngFor="let category of categories" [value]="category.id">
+        {{ category.name }}
+      </mat-option>
     </mat-select>
   </mat-form-field>
+  <button mat-raised-button>Submit</button>
 </form>

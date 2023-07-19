@@ -7,7 +7,7 @@ import { HomeComponentComponent } from "./components/home-component/home-compone
 
 const routes: Routes = [
   { path: 'add', component: AddAnnouncementFormComponent },
-  { path: '', component: HomeComponentComponent },
+  { path: '', component: HomeComponentComponent, pathMatch: 'full' },
   { path: '**', component: HomeComponentComponent}
 ];
 

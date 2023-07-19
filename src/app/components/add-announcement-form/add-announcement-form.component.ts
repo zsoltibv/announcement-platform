@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Category } from "src/app/models/category";
 
 @Component({
   selector: 'app-add-announcement-form',
@@ -6,5 +8,25 @@ import { Component } from '@angular/core';
   styleUrls: ['./add-announcement-form.component.scss']
 })
 export class AddAnnouncementFormComponent {
+  categories: Category[] = [{
+    id: 1,
+    name: 'Course'
+  }, {
+    id: 2,
+    name: 'General'
+  }, {
+    id: 3,
+    name: 'Laboratory'
+  }]
 
+  announcementForm = new FormGroup({
+    title: new FormControl('', Validators.required),
+    author: new FormControl('', Validators.required),
+    message: new FormControl('', Validators.required),
+    category: new FormControl('', Validators.required),
+  });
+
+  onSubmit(): void {
+    console.log(this.announcementForm.value);
+  }
 }

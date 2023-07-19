@@ -15,6 +15,11 @@ import {FormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponentComponent } from './components/home-component/home-component.component';
 import {RouterModule} from '@angular/router';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -23,7 +28,8 @@ import {RouterModule} from '@angular/router';
     CategoriesComponent,
     NameFormatPipe,
     AddAnnouncementFormComponent,
-    HomeComponentComponent
+    HomeComponentComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +40,12 @@ import {RouterModule} from '@angular/router';
     MatSelectModule,
     FormsModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

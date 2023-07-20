@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Announcement } from "src/app/models/announcement";
 import { Category } from "src/app/models/category";
+import { AnnouncementService } from "src/app/services/announcement.service";
 
 @Component({
   selector: 'app-home-component',
@@ -10,50 +11,17 @@ import { Category } from "src/app/models/category";
 export class HomeComponentComponent {
   title = 'notifications-app';
 
-  categories: Category[] = [{
-    id: 1,
-    name: 'Course'
-  }, {
-    id: 2,
-    name: 'General'
-  }, {
-    id: 3,
-    name: 'Laboratory'
-  }]
-
-  announcements: Announcement[] = [{
-    title: 'Test Title',
-    message: 'Test Message',
-    author: 'Test Author',
-    category: this.categories[0]
-  },
-  {
-    title: 'Test Title2',
-    message: 'Test Message2',
-    author: 'Test Author2',
-    category: this.categories[1]
-  },
-  {
-    title: 'Test Title3',
-    message: 'Test Message3',
-    author: 'Test Author3',
-    category: this.categories[1]
-  },
-  {
-    title: 'Test Title4',
-    message: 'Test Message4',
-    author: 'Test Author4',
-    category: this.categories[2]
-  },];
-
+  announcements: Announcement[] = [];
   filteredAnnouncements: Announcement[] = []
 
-  constructor() {
-    this.filteredAnnouncements = this.announcements;
+  constructor(private announcementService: AnnouncementService) {
   }
 
   ngOnInit(): void {
-
+    this.announcementService.getAnnouncements().subscribe((announcements: Announcement[]) => {
+      this.announcements = announcements;
+      this.filteredAnnouncements = announcements;
+    });
   }
 
   filterCategories(category: Category): void {

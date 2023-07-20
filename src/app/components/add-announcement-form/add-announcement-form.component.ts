@@ -1,7 +1,9 @@
+import { Announcement } from 'src/app/models/announcement';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Category } from "src/app/models/category";
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
+import { AnnouncementService } from "src/app/services/announcement.service";
 
 @Component({
   selector: 'app-add-announcement-form',
@@ -20,9 +22,10 @@ export class AddAnnouncementFormComponent {
     name: 'Laboratory'
   }]
 
-  constructor(private router: Router){}
+  constructor(private router: Router, private announcementService: AnnouncementService) { }
 
   announcementForm = new FormGroup({
+    id: new FormControl(this.announcementService.id++),
     title: new FormControl('', Validators.required),
     author: new FormControl('', Validators.required),
     message: new FormControl('', Validators.required),
@@ -31,6 +34,10 @@ export class AddAnnouncementFormComponent {
 
   onSubmit(): void {
     console.log(this.announcementForm.value);
+
+    const newAnnouncement: Announcement = Object.assign(this.announcementForm.value);
+    this.announcementService.addAnnouncement(newAnnouncement);
+
     this.router.navigate(['/home']);
   }
 }

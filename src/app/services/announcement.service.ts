@@ -66,11 +66,11 @@ export class AnnouncementService {
     this.announcements.push(announcement);
   }
 
-  // deleteAnnouncement(id: number): void {
-  //   this.announcements.forEach((element, index) => {
-  //     if (element.id == id) {
-  //       this.announcements.splice(index, 1);
-  //     }
-  //   });
-  // }
+  deleteAnnouncement(id: number): void {
+    this.announcements.forEach((element, index) => {
+      if (element.id == id) {
+        this.announcements.splice(index, 1);
+      }
+    });
+  }
 }

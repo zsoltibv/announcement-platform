@@ -10,6 +10,6 @@
   </mat-card-content>
   <mat-card-actions>
     <button mat-button class="delete-button" (click)="deleteAnnouncement()">Delete</button>
-    <button mat-button class="edit-button">Edit</button>
+    <button mat-button class="edit-button" [routerLink]="['/announcement/edit', announcement.id]">Edit</button>
   </mat-card-actions>
 </mat-card>

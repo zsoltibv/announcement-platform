@@ -21,6 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AnnouncementDetailsComponent } from './components/announcement-details/announcement-details.component';
+import { EditAnnouncementFormComponent } from './components/edit-announcement-form/edit-announcement-form.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { AnnouncementDetailsComponent } from './components/announcement-details/
     AddAnnouncementFormComponent,
     HomeComponentComponent,
     NavbarComponent,
-    AnnouncementDetailsComponent
+    AnnouncementDetailsComponent,
+    EditAnnouncementFormComponent
   ],
   imports: [
     BrowserModule,

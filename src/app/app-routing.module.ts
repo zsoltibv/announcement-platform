@@ -6,11 +6,13 @@ import { RouterModule } from "@angular/router";
 import { HomeComponentComponent } from "./components/home-component/home-component.component";
 import { AnnouncementComponent } from "./components/announcement/announcement.component";
 import { AnnouncementDetailsComponent } from "./components/announcement-details/announcement-details.component";
+import { EditAnnouncementFormComponent } from "./components/edit-announcement-form/edit-announcement-form.component";
 
 const routes: Routes = [
   { path: 'add', component: AddAnnouncementFormComponent },
   { path: '', component: HomeComponentComponent, pathMatch: 'full' },
   { path: 'announcement/:id', component: AnnouncementDetailsComponent, pathMatch: 'full' },
+  { path: 'announcement/edit/:id', component: EditAnnouncementFormComponent, pathMatch: 'full' },
   { path: '**', component: HomeComponentComponent }
 ];
 

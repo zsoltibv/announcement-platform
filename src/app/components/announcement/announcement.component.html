@@ -2,6 +2,7 @@
   <mat-card-header>
     <mat-card-title [routerLink]="['/announcement', announcement.id]">{{announcement.title}}</mat-card-title>
     <mat-card-subtitle>{{announcement.author | nameFormat}}</mat-card-subtitle>
+    <mat-card-subtitle>Category: {{announcement.category.name}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <p>

@@ -20,4 +20,8 @@ export class AnnouncementComponent {
   deleteAnnouncement(): void {
     this.announcementService.deleteAnnouncement(this.announcement.id);
   }
+
+  editAnnouncement(): void {
+    this.announcementService.editAnnouncement(this.announcement, this.announcement.id);
+  }
 }

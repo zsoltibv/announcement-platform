@@ -2,7 +2,7 @@ import { AddAnnouncementFormComponent } from './../components/add-announcement-f
 import { Injectable } from '@angular/core';
 import { Announcement } from "../models/announcement";
 import { Category } from "../models/category";
-import { Observable, of } from "rxjs";
+import { Observable, of, throwError } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -58,6 +58,15 @@ export class AnnouncementService {
   ngOnInit(): void {
   }
 
+  getAnnouncement(id: number): Observable<Announcement> {
+    const announcement = this.announcements.find(announcement => announcement.id == id)
+    if (announcement !== undefined) {
+      return of(announcement);
+    } else {
+      return throwError(new Error('Announcement not found'));
+    }
+  }
+
   getAnnouncements(): Observable<Announcement[]> {
     return of(this.announcements);
   }
@@ -72,5 +81,15 @@ export class AnnouncementService {
         this.announcements.splice(index, 1);
       }
     });
+  }
+
+  editAnnouncement(announcement: Announcement, id: number): void {
+    const announcementToEdit = this.announcements.find(announcement => announcement.id == id);
+    if (announcementToEdit) {
+      announcementToEdit.title = announcement.title;
+      announcementToEdit.author = announcement.author;
+      announcementToEdit.message = announcement.message;
+      announcementToEdit.category = announcement.category;
+    }
   }
 }

@@ -29,13 +29,19 @@ export class AddAnnouncementFormComponent {
     title: new FormControl('', Validators.required),
     author: new FormControl('', Validators.required),
     message: new FormControl('', Validators.required),
-    category: new FormControl('', Validators.required),
+    category: new FormControl(0, Validators.required),
   });
 
   onSubmit(): void {
     console.log(this.announcementForm.value);
 
-    const newAnnouncement: Announcement = Object.assign(this.announcementForm.value);
+    const newAnnouncement: Announcement = Object.assign({
+      id: this.announcementForm.value.id,
+      title: this.announcementForm.value.title,
+      author: this.announcementForm.value.author,
+      message: this.announcementForm.value.message,
+      category: this.categories.find(x => x.id == this.announcementForm.value.category) as Category
+    });
     this.announcementService.addAnnouncement(newAnnouncement);
 
     this.router.navigate(['/home']);

@@ -68,14 +68,16 @@ export class EditAnnouncementFormComponent {
   }
 
   onSubmit(): void {
-    const editAnnouncement: Announcement = Object.assign({
-      id: this.announcementForm.value.id,
-      title: this.announcementForm.value.title,
-      author: this.announcementForm.value.author,
-      message: this.announcementForm.value.message,
-      category: this.categories.find(x => x.id == this.announcementForm.value.category) as Category
-    });
-    this.announcementService.editAnnouncement(editAnnouncement, this.id);
-    this.router.navigate(['/home']);
+    if (this.announcementForm.valid) {
+      const editAnnouncement: Announcement = Object.assign({
+        id: this.announcementForm.value.id,
+        title: this.announcementForm.value.title,
+        author: this.announcementForm.value.author,
+        message: this.announcementForm.value.message,
+        category: this.categories.find(x => x.id == this.announcementForm.value.category) as Category
+      });
+      this.announcementService.editAnnouncement(editAnnouncement, this.id);
+      this.router.navigate(['/']);
+    }
   }
 }

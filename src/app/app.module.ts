@@ -47,6 +47,7 @@ import { EditAnnouncementFormComponent } from './components/edit-announcement-fo
     RouterModule,
     MatFormFieldModule,
     MatInputModule,
+    FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatToolbarModule

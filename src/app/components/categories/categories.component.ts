@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Category } from "src/app/models/category";
+import { CategoryService } from "src/app/services/category.service";
 
 @Component({
   selector: 'app-categories',
@@ -7,16 +8,13 @@ import { Category } from "src/app/models/category";
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent {
-  categories: Category[] = [{
-    id: 1,
-    name: 'Course'
-  }, {
-    id: 2,
-    name: 'General'
-  }, {
-    id: 3,
-    name: 'Laboratory'
-  }]
+  categories: Category[] = [];
+
+  constructor(private categoryService: CategoryService) {
+    this.categoryService.getCategories().subscribe((categories) => {
+      this.categories = categories;
+    });
+  }
 
   @Output() changeCategory = new EventEmitter<Category>();
 

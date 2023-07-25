@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { mergeMap } from "rxjs";
 import { Announcement } from "src/app/models/announcement";
 import { Category } from "src/app/models/category";
 import { AnnouncementService } from "src/app/services/announcement.service";
@@ -21,6 +22,13 @@ export class HomeComponentComponent {
     this.announcementService.getAnnouncements().subscribe((announcements: Announcement[]) => {
       this.announcements = announcements;
       this.filteredAnnouncements = announcements;
+    });
+
+    this.announcementService.subj.pipe(mergeMap(()=> this.announcementService.getAnnouncements())).subscribe((announcements: Announcement[]) => {
+      this.announcementService.getAnnouncements().subscribe((announcements: Announcement[]) => {
+        this.announcements = announcements;
+        this.filteredAnnouncements = announcements;
+      });
     });
   }
 

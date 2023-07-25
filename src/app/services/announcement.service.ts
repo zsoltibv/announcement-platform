@@ -2,7 +2,7 @@ import { AddAnnouncementFormComponent } from './../components/add-announcement-f
 import { Injectable } from '@angular/core';
 import { Announcement } from "../models/announcement";
 import { Category } from "../models/category";
-import { Observable, of, throwError } from "rxjs";
+import { Observable, Subject, of, throwError } from "rxjs";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
@@ -10,6 +10,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class AnnouncementService {
   baseURL: string = "https://newsapi20221108120432.azurewebsites.net/api/Announcements"
+  subj = new Subject();
+
 
   readonly httpOptions = {
     headers: new HttpHeaders({

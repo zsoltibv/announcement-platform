@@ -29,6 +29,8 @@ export class AnnouncementComponent {
 
   deleteAnnouncement(): void {
     console.log(this.announcement.id);
-    this.announcementService.deleteAnnouncement(this.announcement.id).subscribe();
+    this.announcementService.deleteAnnouncement(this.announcement.id).subscribe(
+      () => {this.announcementService.subj.next("");}
+    );
   }
 }

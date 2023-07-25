@@ -22,6 +22,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AnnouncementDetailsComponent } from './components/announcement-details/announcement-details.component';
 import { EditAnnouncementFormComponent } from './components/edit-announcement-form/edit-announcement-form.component';
+import { HttpClient, HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { EditAnnouncementFormComponent } from './components/edit-announcement-fo
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatToolbarModule
+    MatToolbarModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

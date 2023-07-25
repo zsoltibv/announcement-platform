@@ -18,6 +18,7 @@ export class AnnouncementComponent {
   }
 
   deleteAnnouncement(): void {
-    this.announcementService.deleteAnnouncement(this.announcement.id);
+    console.log(this.announcement.id);
+    this.announcementService.deleteAnnouncement(this.announcement.id).subscribe();
   }
 }

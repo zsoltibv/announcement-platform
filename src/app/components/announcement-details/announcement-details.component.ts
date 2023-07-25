@@ -18,7 +18,8 @@ export class AnnouncementDetailsComponent {
     title: "",
     author: "",
     message: "",
-    category: {} as Category
+    categoryId: "",
+    imageURL: ""
   };
 
   constructor(private route: ActivatedRoute, private announcementService: AnnouncementService) { }

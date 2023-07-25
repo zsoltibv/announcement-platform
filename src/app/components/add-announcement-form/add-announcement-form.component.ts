@@ -25,26 +25,28 @@ export class AddAnnouncementFormComponent {
   constructor(private router: Router, private announcementService: AnnouncementService) { }
 
   announcementForm = new FormGroup({
-    id: new FormControl(this.announcementService.id++),
     title: new FormControl('', Validators.required),
     author: new FormControl('', Validators.required),
     message: new FormControl('', Validators.required),
-    category: new FormControl(this.categories[0].id, Validators.required),
+    categoryId: new FormControl('', Validators.required),
+    imageURL: new FormControl('')
   });
 
   onSubmit(): void {
-    console.log(this.announcementForm.value);
 
     if (this.announcementForm.valid) {
       const newAnnouncement: Announcement = Object.assign({
-        id: this.announcementForm.value.id,
         title: this.announcementForm.value.title,
         author: this.announcementForm.value.author,
         message: this.announcementForm.value.message,
-        category: this.categories.find(x => x.id == this.announcementForm.value.category) as Category
+        categoryId: this.announcementForm.value.categoryId?.toString(),
+        imageURL: this.announcementForm.value.imageURL
       });
-      this.announcementService.addAnnouncement(newAnnouncement);
-      this.router.navigate(['/home']);
+      this.announcementService.addAnnouncement(newAnnouncement).subscribe(
+        () => {
+          this.router.navigate(['/']);
+        }
+      );
     }
   }
 }

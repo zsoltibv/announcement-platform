@@ -32,7 +32,7 @@ export class HomeComponentComponent {
       this.filteredAnnouncements = this.announcements;
     else {
       this.announcements.forEach(element => {
-        if (element.category.id == category.id) {
+        if (element.categoryId == category.id.toString()) {
           this.filteredAnnouncements.push(element);
         }
       });

@@ -19,7 +19,8 @@ export class EditAnnouncementFormComponent {
     title: "",
     author: "",
     message: "",
-    category: {} as Category
+    categoryId: "",
+    imageURL: ""
   };
 
   announcementForm = new FormGroup({
@@ -27,7 +28,8 @@ export class EditAnnouncementFormComponent {
     title: new FormControl('', Validators.required),
     author: new FormControl('', Validators.required),
     message: new FormControl('', Validators.required),
-    category: new FormControl(0, Validators.required),
+    categoryId: new FormControl('', Validators.required),
+    imageURL: new FormControl('')
   });
 
   categories: Category[] = [{
@@ -50,18 +52,18 @@ export class EditAnnouncementFormComponent {
 
     this.announcementService.getAnnouncement(this.id).subscribe((announcement) => {
       this.announcement = announcement;
+      this.fillFormWithEditData();
     });
-
-    this.fillFormWithEditData();
   }
 
   fillFormWithEditData(): void {
+
     this.announcementForm.patchValue({
       id: this.announcement.id,
       title: this.announcement.title,
       author: this.announcement.author,
       message: this.announcement.message,
-      category: this.announcement.category.id
+      categoryId: this.announcement.categoryId.toString()
     });
 
     console.log(this.announcementForm.value);
@@ -74,10 +76,15 @@ export class EditAnnouncementFormComponent {
         title: this.announcementForm.value.title,
         author: this.announcementForm.value.author,
         message: this.announcementForm.value.message,
-        category: this.categories.find(x => x.id == this.announcementForm.value.category) as Category
+        categoryId: this.announcementForm.value.categoryId?.toString(),
+        imageURL: this.announcementForm.value.imageURL
       });
-      this.announcementService.editAnnouncement(editAnnouncement, this.id);
-      this.router.navigate(['/']);
+      console.log(editAnnouncement)
+      this.announcementService.editAnnouncement(editAnnouncement, this.id).subscribe(
+        () => {
+          this.router.navigate(['/']);
+        }
+      );
     }
   }
 }

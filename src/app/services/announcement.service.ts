@@ -3,93 +3,53 @@ import { Injectable } from '@angular/core';
 import { Announcement } from "../models/announcement";
 import { Category } from "../models/category";
 import { Observable, of, throwError } from "rxjs";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnnouncementService {
+  baseURL: string = "https://newsapi20221108120432.azurewebsites.net/api/Announcements"
 
-  categories: Category[] = [{
-    id: 1,
-    name: 'Course'
-  }, {
-    id: 2,
-    name: 'General'
-  }, {
-    id: 3,
-    name: 'Laboratory'
-  }]
+  readonly httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    })
+  };
 
-  announcements: Announcement[] = [
-    {
-      id: 1,
-      title: 'Test Title',
-      message: 'Test Message',
-      author: 'Test Author',
-      category: this.categories[0]
-    },
-    {
-      id: 2,
-      title: 'Test Title2',
-      message: 'Test Message2',
-      author: 'Test Author2',
-      category: this.categories[1]
-    },
-    {
-      id: 3,
-      title: 'Test Title3',
-      message: 'Test Message3',
-      author: 'Test Author3',
-      category: this.categories[1]
-    },
-    {
-      id: 4,
-      title: 'Test Title4',
-      message: 'Test Message4',
-      author: 'Test Author4',
-      category: this.categories[2]
-    },
-  ];
+  constructor(private http: HttpClient) { }
 
-  id: number = this.announcements.length + 1;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-  getAnnouncement(id: number): Observable<Announcement> {
-    const announcement = this.announcements.find(announcement => announcement.id == id)
-    if (announcement !== undefined) {
-      return of(announcement);
-    } else {
-      return throwError(new Error('Announcement not found'));
-    }
+  getAnnouncement(id: string): Observable<Announcement> {
+    return this.http.get<Announcement>(this.baseURL + '/' + id);
   }
 
   getAnnouncements(): Observable<Announcement[]> {
-    return of(this.announcements);
+    return this.http.get<Announcement[]>(this.baseURL);
   }
 
-  addAnnouncement(announcement: Announcement): void {
-    this.announcements.push(announcement);
+  addAnnouncement(announcement: Announcement): Observable<Announcement> {
+
+    return this.http.post<Announcement>(
+      this.baseURL,
+      announcement,
+      { headers: this.httpOptions.headers }
+    );
   }
 
-  deleteAnnouncement(id: number): void {
-    this.announcements.forEach((element, index) => {
-      if (element.id == id) {
-        this.announcements.splice(index, 1);
-      }
-    });
+  deleteAnnouncement(id: number): Observable<Announcement> {
+
+    return this.http.delete<Announcement>(
+      this.baseURL + '/' + id,
+      { headers: this.httpOptions.headers }
+    );
   }
 
-  editAnnouncement(announcement: Announcement, id: number): void {
-    const announcementToEdit = this.announcements.find(announcement => announcement.id == id);
-    if (announcementToEdit) {
-      announcementToEdit.title = announcement.title;
-      announcementToEdit.author = announcement.author;
-      announcementToEdit.message = announcement.message;
-      announcementToEdit.category = announcement.category;
-    }
+  editAnnouncement(announcement: Announcement, id: number): Observable<Announcement> {
+
+    return this.http.put<Announcement>(
+      this.baseURL + '/' + id,
+      announcement,
+      { headers: this.httpOptions.headers }
+    );
   }
 }

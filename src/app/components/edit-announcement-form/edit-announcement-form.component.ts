@@ -4,6 +4,7 @@ import { ActivatedRoute, Route, Router } from "@angular/router";
 import { Announcement } from "src/app/models/announcement";
 import { Category } from "src/app/models/category";
 import { AnnouncementService } from "src/app/services/announcement.service";
+import { CategoryService } from "src/app/services/category.service";
 
 @Component({
   selector: 'app-edit-announcement-form',
@@ -32,18 +33,14 @@ export class EditAnnouncementFormComponent {
     imageURL: new FormControl('')
   });
 
-  categories: Category[] = [{
-    id: 1,
-    name: 'Course'
-  }, {
-    id: 2,
-    name: 'General'
-  }, {
-    id: 3,
-    name: 'Laboratory'
-  }]
+  categories: Category[] = []
 
-  constructor(private router: Router, private route: ActivatedRoute, private announcementService: AnnouncementService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private announcementService: AnnouncementService,
+    private categoryService: CategoryService) {
+    this.categoryService.getCategories().subscribe((categories) => {
+      this.categories = categories;
+    });
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {

@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Category } from "src/app/models/category";
 import { Router } from "@angular/router";
 import { AnnouncementService } from "src/app/services/announcement.service";
+import { CategoryService } from "src/app/services/category.service";
 
 @Component({
   selector: 'app-add-announcement-form',
@@ -11,18 +12,13 @@ import { AnnouncementService } from "src/app/services/announcement.service";
   styleUrls: ['./add-announcement-form.component.scss']
 })
 export class AddAnnouncementFormComponent {
-  categories: Category[] = [{
-    id: 1,
-    name: 'Course'
-  }, {
-    id: 2,
-    name: 'General'
-  }, {
-    id: 3,
-    name: 'Laboratory'
-  }]
+  categories: Category[] = []
 
-  constructor(private router: Router, private announcementService: AnnouncementService) { }
+  constructor(private router: Router, private announcementService: AnnouncementService, private categoryService: CategoryService) {
+    this.categoryService.getCategories().subscribe((categories) => {
+      this.categories = categories;
+    });
+  }
 
   announcementForm = new FormGroup({
     title: new FormControl('', Validators.required),

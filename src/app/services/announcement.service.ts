@@ -9,14 +9,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AnnouncementService {
-  baseURL: string = "https://newsapi20221108120432.azurewebsites.net/api/Announcements"
+  baseURL: string = "https://localhost:7261/api/Announcement"
   subj = new Subject();
 
 
   readonly httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-    })
+
+    }),
   };
 
   constructor(private http: HttpClient) { }
@@ -29,29 +30,29 @@ export class AnnouncementService {
     return this.http.get<Announcement[]>(this.baseURL);
   }
 
-  addAnnouncement(announcement: Announcement): Observable<Announcement> {
+  addAnnouncement(announcement: Announcement): Observable<any> {
 
-    return this.http.post<Announcement>(
+    return this.http.post(
       this.baseURL,
       announcement,
-      { headers: this.httpOptions.headers }
+      { headers: this.httpOptions.headers, 'responseType': "text" }
     );
   }
 
-  deleteAnnouncement(id: number): Observable<Announcement> {
+  deleteAnnouncement(id: number): Observable<any> {
 
-    return this.http.delete<Announcement>(
+    return this.http.delete(
       this.baseURL + '/' + id,
-      { headers: this.httpOptions.headers }
+      { headers: this.httpOptions.headers, 'responseType': "text" }
     );
   }
 
-  editAnnouncement(announcement: Announcement, id: number): Observable<Announcement> {
+  editAnnouncement(announcement: Announcement, id: number): Observable<any> {
 
-    return this.http.put<Announcement>(
+    return this.http.put(
       this.baseURL + '/' + id,
       announcement,
-      { headers: this.httpOptions.headers }
+      { headers: this.httpOptions.headers, 'responseType': "text" }
     );
   }
 }

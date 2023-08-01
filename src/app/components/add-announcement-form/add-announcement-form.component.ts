@@ -23,9 +23,8 @@ export class AddAnnouncementFormComponent {
   announcementForm = new FormGroup({
     title: new FormControl('', Validators.required),
     author: new FormControl('', Validators.required),
-    message: new FormControl('', Validators.required),
+    description: new FormControl('', Validators.required),
     categoryId: new FormControl('', Validators.required),
-    imageURL: new FormControl('')
   });
 
   onSubmit(): void {
@@ -34,10 +33,10 @@ export class AddAnnouncementFormComponent {
       const newAnnouncement: Announcement = Object.assign({
         title: this.announcementForm.value.title,
         author: this.announcementForm.value.author,
-        message: this.announcementForm.value.message,
+        description: this.announcementForm.value.description,
         categoryId: this.announcementForm.value.categoryId?.toString(),
-        imageURL: this.announcementForm.value.imageURL
       });
+      console.log(newAnnouncement);
       this.announcementService.addAnnouncement(newAnnouncement).subscribe(
         () => {
           this.router.navigate(['/']);

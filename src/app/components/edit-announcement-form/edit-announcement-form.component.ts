@@ -19,18 +19,16 @@ export class EditAnnouncementFormComponent {
     id: 0,
     title: "",
     author: "",
-    message: "",
-    categoryId: "",
-    imageURL: ""
+    description: "",
+    categoryId: ""
   };
 
   announcementForm = new FormGroup({
     id: new FormControl(),
     title: new FormControl('', Validators.required),
     author: new FormControl('', Validators.required),
-    message: new FormControl('', Validators.required),
+    description: new FormControl('', Validators.required),
     categoryId: new FormControl('', Validators.required),
-    imageURL: new FormControl('')
   });
 
   categories: Category[] = []
@@ -59,7 +57,7 @@ export class EditAnnouncementFormComponent {
       id: this.announcement.id,
       title: this.announcement.title,
       author: this.announcement.author,
-      message: this.announcement.message,
+      description: this.announcement.description,
       categoryId: this.announcement.categoryId.toString()
     });
 
@@ -72,9 +70,8 @@ export class EditAnnouncementFormComponent {
         id: this.announcementForm.value.id,
         title: this.announcementForm.value.title,
         author: this.announcementForm.value.author,
-        message: this.announcementForm.value.message,
+        description: this.announcementForm.value.description,
         categoryId: this.announcementForm.value.categoryId?.toString(),
-        imageURL: this.announcementForm.value.imageURL
       });
       console.log(editAnnouncement)
       this.announcementService.editAnnouncement(editAnnouncement, this.id).subscribe(

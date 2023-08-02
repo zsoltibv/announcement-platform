@@ -12,6 +12,7 @@ import { AnnouncementService } from "src/app/services/announcement.service";
 })
 export class HomeComponentComponent {
   title = 'notifications-app';
+  breakpoint: number = 0;
 
   announcements: Announcement[] = [];
   filteredAnnouncements: Announcement[] = []
@@ -23,6 +24,8 @@ export class HomeComponentComponent {
   }
 
   ngOnInit(): void {
+    this.resizeRules(window.innerWidth);
+
     //signalr
     this.notificationService.initWebSocket();
 
@@ -62,5 +65,19 @@ export class HomeComponentComponent {
         }
       });
     }
+  }
+
+  resizeRules(width: any): void {
+    if (width <= 768) {
+      this.breakpoint = 1;
+    } else if (width <= 1200) {
+      this.breakpoint = 2;
+    } else {
+      this.breakpoint = 3;
+    }
+  }
+
+  onResize(event: any) {
+    this.resizeRules(event.target.innerWidth);
   }
 }

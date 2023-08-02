@@ -6,7 +6,7 @@
   Notification: {{ notificationMessage }}
 </p>
 <div *ngIf="filteredAnnouncements.length > 0; else noAnnouncementMessage">
-  <mat-grid-list cols="3" rowHeight="270px">
+  <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="270px">
     <mat-grid-tile *ngFor="let announcement of filteredAnnouncements">
       <app-announcement
         [announcement]="announcement"

@@ -7,7 +7,7 @@ import { Observable } from "rxjs";
   providedIn: 'root'
 })
 export class CategoryService {
-  baseURL: string = "https://newsapi20221108120432.azurewebsites.net/api/Categories"
+  baseURL: string = "https://localhost:7261/api/Categories"
 
   readonly httpOptions = {
     headers: new HttpHeaders({

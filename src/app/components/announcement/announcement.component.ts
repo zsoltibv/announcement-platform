@@ -1,3 +1,4 @@
+import { NotificationService } from './../../services/notification.service';
 import { Category } from './../../models/category';
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
@@ -17,7 +18,7 @@ export class AnnouncementComponent {
   currentCategory: Category = {} as Category;
 
   constructor(private announcementService: AnnouncementService,
-    private categoryService: CategoryService) {
+    private categoryService: CategoryService, private notificationService: NotificationService) {
     this.categoryService.getCategories().subscribe((categories) => {
       this.categories = categories;
       this.currentCategory = this.categories.find(x => x.id.toString() == this.announcement.categoryId) || {} as Category;
@@ -30,7 +31,10 @@ export class AnnouncementComponent {
   deleteAnnouncement(): void {
     console.log(this.announcement.id);
     this.announcementService.deleteAnnouncement(this.announcement.id).subscribe(
-      () => {this.announcementService.subj.next("");}
+      () => {
+        this.notificationService.sendMessage("BroadcastMessage", [this.announcement]);
+        this.announcementService.subj.next("");
+      }
     );
   }
 }

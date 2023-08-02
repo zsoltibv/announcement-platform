@@ -1,3 +1,4 @@
+import { NotificationService } from './../../services/notification.service';
 import { Announcement } from 'src/app/models/announcement';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
@@ -14,7 +15,8 @@ import { CategoryService } from "src/app/services/category.service";
 export class AddAnnouncementFormComponent {
   categories: Category[] = []
 
-  constructor(private router: Router, private announcementService: AnnouncementService, private categoryService: CategoryService) {
+  constructor(private router: Router, private announcementService: AnnouncementService,
+    private categoryService: CategoryService, private notificationService: NotificationService) {
     this.categoryService.getCategories().subscribe((categories) => {
       this.categories = categories;
     });
@@ -39,6 +41,7 @@ export class AddAnnouncementFormComponent {
       console.log(newAnnouncement);
       this.announcementService.addAnnouncement(newAnnouncement).subscribe(
         () => {
+          this.notificationService.sendMessage("BroadcastMessage", [newAnnouncement]);
           this.router.navigate(['/']);
         }
       );

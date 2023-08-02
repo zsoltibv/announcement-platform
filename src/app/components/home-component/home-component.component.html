@@ -2,6 +2,9 @@
   class="category-selector"
   (changeCategory)="filterCategories($event)"
 ></app-categories>
+<p>
+  Notification: {{ notificationMessage }}
+</p>
 <mat-grid-list cols="3" rowHeight="270px">
   <mat-grid-tile *ngFor="let announcement of filteredAnnouncements">
     <app-announcement

@@ -23,6 +23,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { AnnouncementDetailsComponent } from './components/announcement-details/announcement-details.component';
 import { EditAnnouncementFormComponent } from './components/edit-announcement-form/edit-announcement-form.component';
 import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { NotificationService } from "./services/notification.service";
 
 @NgModule({
   declarations: [
@@ -54,7 +55,9 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
     MatToolbarModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    NotificationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

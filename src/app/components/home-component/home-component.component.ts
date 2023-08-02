@@ -1,3 +1,4 @@
+import { NotificationService } from './../../services/notification.service';
 import { Component } from '@angular/core';
 import { mergeMap } from "rxjs";
 import { Announcement } from "src/app/models/announcement";
@@ -15,16 +16,32 @@ export class HomeComponentComponent {
   announcements: Announcement[] = [];
   filteredAnnouncements: Announcement[] = []
 
-  constructor(private announcementService: AnnouncementService) {
+  notificationMessage: string = "";
+
+  constructor(private announcementService: AnnouncementService,
+    private notificationService: NotificationService) {
   }
 
   ngOnInit(): void {
+    //signalr
+    this.notificationService.initWebSocket();
+
+    this.notificationService.notificationSubject.subscribe((hasNotifications) => {
+      if (hasNotifications) {
+        this.notificationMessage = "New notifications, please refresh the page";
+        this.announcementService.getAnnouncements().subscribe((announcements: Announcement[]) => {
+          this.announcements = announcements;
+          this.filteredAnnouncements = announcements;
+        });
+      }
+    });
+
     this.announcementService.getAnnouncements().subscribe((announcements: Announcement[]) => {
       this.announcements = announcements;
       this.filteredAnnouncements = announcements;
     });
 
-    this.announcementService.subj.pipe(mergeMap(()=> this.announcementService.getAnnouncements())).subscribe((announcements: Announcement[]) => {
+    this.announcementService.subj.pipe(mergeMap(() => this.announcementService.getAnnouncements())).subscribe((announcements: Announcement[]) => {
       this.announcementService.getAnnouncements().subscribe((announcements: Announcement[]) => {
         this.announcements = announcements;
         this.filteredAnnouncements = announcements;

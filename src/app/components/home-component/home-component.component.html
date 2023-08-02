@@ -5,11 +5,19 @@
 <p>
   Notification: {{ notificationMessage }}
 </p>
-<mat-grid-list cols="3" rowHeight="270px">
-  <mat-grid-tile *ngFor="let announcement of filteredAnnouncements">
-    <app-announcement
-      [announcement]="announcement"
-      class="announcement-card"
-    ></app-announcement>
-  </mat-grid-tile>
-</mat-grid-list>
+<div *ngIf="filteredAnnouncements.length > 0; else noAnnouncementMessage">
+  <mat-grid-list cols="3" rowHeight="270px">
+    <mat-grid-tile *ngFor="let announcement of filteredAnnouncements">
+      <app-announcement
+        [announcement]="announcement"
+        class="announcement-card"
+      ></app-announcement>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
+<ng-template #noAnnouncementMessage>
+  <div class="no-announcement-message">
+    <p>No announcements available.</p>
+  </div>
+</ng-template>

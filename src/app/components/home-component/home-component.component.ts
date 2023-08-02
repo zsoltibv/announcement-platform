@@ -57,7 +57,7 @@ export class HomeComponentComponent {
       this.filteredAnnouncements = this.announcements;
     else {
       this.announcements.forEach(element => {
-        if (element.categoryId == category.id.toString()) {
+        if (element.categoryId == category.id) {
           this.filteredAnnouncements.push(element);
         }
       });

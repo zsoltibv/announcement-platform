@@ -1,7 +1,7 @@
 <mat-form-field>
   <mat-label>Select a category</mat-label>
   <mat-select #selectedCategory>
-    <mat-option (click)="filterCategories(selectedCategory.value)">None</mat-option>
+    <mat-option (click)="resetCategories(selectedCategory.value)">None</mat-option>
     <mat-option
       *ngFor="let category of categories"
       [value]="category.id"

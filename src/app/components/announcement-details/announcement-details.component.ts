@@ -1,3 +1,4 @@
+import { CategoryService } from 'src/app/services/category.service';
 import { Category } from './../../models/category';
 import { Announcement } from 'src/app/models/announcement';
 import { AnnouncementService } from 'src/app/services/announcement.service';
@@ -12,6 +13,7 @@ import { ActivatedRoute } from "@angular/router";
 export class AnnouncementDetailsComponent {
 
   id: any = '';
+  currentCategory: Category = {} as Category;
 
   announcement: Announcement = {
     id: 0,
@@ -21,7 +23,8 @@ export class AnnouncementDetailsComponent {
     categoryId: ""
   };
 
-  constructor(private route: ActivatedRoute, private announcementService: AnnouncementService) { }
+  constructor(private route: ActivatedRoute, private announcementService: AnnouncementService,
+    private categoryService:CategoryService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -30,6 +33,11 @@ export class AnnouncementDetailsComponent {
 
     this.announcementService.getAnnouncement(this.id).subscribe((announcement) => {
       this.announcement = announcement;
+      this.categoryService.getCategory(this.announcement.categoryId).subscribe((category) => {
+        this.currentCategory = category;
+      });
     });
+
+    console.log(this.currentCategory);
   }
 }

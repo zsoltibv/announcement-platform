@@ -19,13 +19,16 @@ export class AnnouncementComponent {
 
   constructor(private announcementService: AnnouncementService,
     private categoryService: CategoryService, private notificationService: NotificationService) {
-    this.categoryService.getCategories().subscribe((categories) => {
-      this.categories = categories;
-      this.currentCategory = this.categories.find(x => x.id.toString() == this.announcement.categoryId) || {} as Category;
-    });
   }
 
   ngOnInit(): void {
+    this.categoryService.getCategories().subscribe((categories) => {
+      this.categories = categories;
+    });
+
+    this.categoryService.getCategory(this.announcement.categoryId).subscribe((category) => {
+      this.currentCategory = category;
+    });
   }
 
   deleteAnnouncement(): void {

@@ -9,6 +9,7 @@ import { CategoryService } from "src/app/services/category.service";
 })
 export class CategoriesComponent {
   categories: Category[] = [];
+  currentCategory: Category = {} as Category;
 
   constructor(private categoryService: CategoryService) {
     this.categoryService.getCategories().subscribe((categories) => {
@@ -16,9 +17,19 @@ export class CategoriesComponent {
     });
   }
 
+  ngOnInit(): void {
+
+  }
+
   @Output() changeCategory = new EventEmitter<Category>();
 
-  filterCategories(categoryId: number): void {
-    this.changeCategory.emit(this.categories[categoryId - 1]);
+  filterCategories(categoryId: string): void {
+    this.categoryService.getCategory(categoryId).subscribe((category) => {
+      this.changeCategory.emit(category);
+    });
+  }
+
+  resetCategories(categoryId: string): void {
+      this.changeCategory.emit(undefined);
   }
 }

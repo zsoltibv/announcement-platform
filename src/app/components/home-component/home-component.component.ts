@@ -77,7 +77,16 @@ export class HomeComponentComponent {
     }
   }
 
-  onResize(event: any) {
+  onResize(event: any): void {
     this.resizeRules(event.target.innerWidth);
+  }
+
+  changeGridCols(cols: number): void {
+    if (cols == 3) {
+      this.resizeRules(window.innerWidth);
+    }
+    else {
+      this.breakpoint = 1;
+    }
   }
 }

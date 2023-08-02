@@ -4,6 +4,12 @@
   padding: 0px 20px;
 }
 
-.category-selector, p{
-  padding: 10px 20px;
+.announcement-options, p{
+  margin: 10px 20px;
+}
+
+.announcement-options{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

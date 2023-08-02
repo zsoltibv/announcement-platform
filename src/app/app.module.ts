@@ -24,6 +24,7 @@ import { AnnouncementDetailsComponent } from './components/announcement-details/
 import { EditAnnouncementFormComponent } from './components/edit-announcement-form/edit-announcement-form.component';
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { NotificationService } from "./services/notification.service";
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { NotificationService } from "./services/notification.service";
     ReactiveFormsModule,
     MatButtonModule,
     MatToolbarModule,
-    HttpClientModule
+    HttpClientModule,
+    MatButtonToggleModule
   ],
   providers: [
     NotificationService

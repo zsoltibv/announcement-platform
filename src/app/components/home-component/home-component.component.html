@@ -1,7 +1,13 @@
-<app-categories
-  class="category-selector"
-  (changeCategory)="filterCategories($event)"
-></app-categories>
+<div class="announcement-options">
+  <app-categories
+    class="category-selector"
+    (changeCategory)="filterCategories($event)"
+  ></app-categories>
+  <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+    <mat-button-toggle value="bold" (click)="changeGridCols(1)">List</mat-button-toggle>
+    <mat-button-toggle value="italic" (click)="changeGridCols(3)">Grid</mat-button-toggle>
+  </mat-button-toggle-group>
+</div>
 <p>
   Notification: {{ notificationMessage }}
 </p>

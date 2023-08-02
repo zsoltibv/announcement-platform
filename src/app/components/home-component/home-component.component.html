@@ -9,7 +9,7 @@
   </mat-button-toggle-group>
 </div>
 <p>
-  Notification: {{ notificationMessage }}
+  {{ notificationMessage }}
 </p>
 <div *ngIf="filteredAnnouncements.length > 0; else noAnnouncementMessage">
   <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="270px">
